@@ -1,0 +1,11 @@
+policies:
+  - name: rds-instances-no-deletion-protection
+    resource: rds
+    description: Detect rds db instances with no deletion protection
+    mode:
+      type: periodic
+      schedule: "rate(1 day)"
+      role: arn:aws:iam::{account_id}:role/CustodianDemo
+      runtime: python3.7
+    filters:
+      - DeletionProtection: false
